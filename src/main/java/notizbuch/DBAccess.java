@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 
 public class DBAccess {
 	
@@ -17,10 +16,12 @@ public class DBAccess {
 	public void readDatabase() throws Exception {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			// Setup the connection with the DB
 			connect = DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/notizbuch?" + "user=sqluser&password=sqluserpw");
+					.getConnection("jdbc:mysql://192.168.64.2:3306/notizbuch","root","");
+					// .getConnection("jdbc:mysql://192.168.64.2:3306/notizbuch?" + "user=root"/*&password=sqluserpw"*/);
+					
 	
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
