@@ -5,4 +5,15 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Notizbuch</name>
   <description>notizbuch</description>
+  
+	<dependencies>
+	
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.30</version>
+		</dependency>
+	
+	</dependencies>
 </project>
+
