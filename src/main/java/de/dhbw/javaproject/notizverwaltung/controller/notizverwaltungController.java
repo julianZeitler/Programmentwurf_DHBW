@@ -72,24 +72,26 @@ public class notizverwaltungController
 		else
 			return (personList.size());
 	}
-
+*/
 	@RequestMapping("/")
 	public String home() {
-		return ("<html>Hallo Welt, hier ist Rolf<br>\n" 
-				+ "GET:<br>\n" 
-				+ "<form action=\"/addPersonMitGETQuery\" Method=\"GET\">\n"
-				+ "Name: <input name=\"name\" type=\"input\"/><br>\n" 
-				+ "Alter: <input name=\"alter\" type=\"input\"/><br>\n"
-				+ "<input name=\"speichern\" type=\"submit\"/><br>\n" 
-				+ "</form>\n"
+		
+		String str = "<html>Hallo Rolf, hier ist die Welt<br>\n" 
+				+ "Notizen:<br>\n" 
+				+ "<table>"
+				+ "	<tr>"
+				+ "		<th>ID</th>"
+				+ "		<th>Notiz</th>"
+				+ "	</tr> " ;
+		
+		for( Notiz n : notizListe) {
+			str = str + "<tr><td> " + n.getID() + " </td> <td> " + n.getInhalt() + " </td></tr>";
+		}
+		
+		str = str + "</table> </html>";
+		
+		return (str);
 
-				+ "POST (funktioniert evtl. nicht wegen CSRF-Policy):<br>\n" 
-				+ "<form action=\"/addPersonMitPOSTQuery\" Method=\"POST\">\n"
-				+ "Name: <input name=\"name\" type=\"input\"/><br>\n" 
-				+ "Alter: <input name=\"alter\" type=\"input\"/><br>\n"
-				+ "<input name=\"speichern\" type=\"submit\"/>\n" 
-				+ "</form><br>\n"
-				+ "</html>\n");
 	}
-	*/
+	
 }
