@@ -23,60 +23,12 @@ public class notizverwaltungController
 	private List<Notiz> notizListe;
 	
 	DBAccess db = new DBAccess();
-
-	/*
-	@RequestMapping("/add")
-	public boolean addPersons() {
-		if (personList == null)
-			personList = new ArrayList<Person>();
-		personList.add(new Person("Peter", 26));
-		personList.add(new Person("Monika", 42));
-		return true;
-	}
-
-	@RequestMapping(value = "/addPersonMitPfad/{name}/{alter}", method = RequestMethod.GET)
-	public @ResponseBody boolean addPersonMitPfad(@PathVariable("name") String name,
-			@PathVariable("alter") String alter) {
-		if (personList == null)
-			personList = new ArrayList<Person>();
-		personList.add(new Person(name, Integer.parseInt(alter)));
-		return true;
-	}
-
-	@GetMapping("/addPersonMitGETQuery")
-	public @ResponseBody boolean addPersonMitGETQuery(@RequestParam String name, @RequestParam String alter) {
-		if (personList == null)
-			personList = new ArrayList<Person>();
-		personList.add(new Person(name, Integer.parseInt(alter)));
-		return true;
-	}
-
-	// Tut leider nicht, wegen CSRF-Sicherheitseinstellungen, es sei denn man 
-	// modifiziert die Sicherheitseinstellungen (siehe Klasse: WebSecurityConfig)
-	@PostMapping("/addPersonMitPOSTQuery")
-	public boolean addPersonMitPOSTQuery(@RequestParam String name, @RequestParam String alter) {
-		if (personList == null)
-			personList = new ArrayList<Person>();
-		personList.add(new Person(name, Integer.parseInt(alter)));
-		return true;
-	}
 	
-
-	@RequestMapping("/list")
-	public List<Person> getPersons() {
-		if (personList == null)
-			personList = new ArrayList<Person>();
-		return personList;
+	@RequestMapping("/new")
+	public @ResponseBody String save(@RequestParam String inhalt) throws Exception {
+		db.addNotiz(inhalt);
+		return "Added successfuly! <br> <a href=\"/\">Return to home</a>";
 	}
-
-	@RequestMapping("/count")
-	public int count() {
-		if (personList == null)
-			return (0);
-		else
-			return (personList.size());
-	}
-*/
 	
 	@RequestMapping("/save")
 	public @ResponseBody String save(@RequestParam int id, @RequestParam String inhalt) throws Exception {
@@ -89,8 +41,9 @@ public class notizverwaltungController
 		
 		this.notizListe = db.getNotizen();
 		
-		String str = "<html>Hallo Rolf, hier ist die Welt<br>\n" 
-				+ "Notizen:<br>\n" 
+		String str = "<html>"
+				+ "<h1>Notizbuch</h1>\n" 
+				+ "<h2>Notizen</h2>\n" 
 				+ "<table>"
 				+ "	<tr>"
 				+ "		<th>ID</th>"
@@ -106,7 +59,13 @@ public class notizverwaltungController
 					+ "<td> <input name=\"speichern\" type=\"submit\"/></td> </form> </tr>";
 		}
 		
-		str = str + "</table></html>";
+		str = str + "</table>"
+				+ "<h2>Neue Notiz</h2>"
+				+ "<form action=\"/new\" Method=\"GET\">"
+				+ "<input name=\"inhalt\" type=\"input\" />"
+				+ "<input name=\"speichern\" type=\"submit\"/> "
+				+ "</form>"
+				+ "</html>";
 		
 		return (str);
 

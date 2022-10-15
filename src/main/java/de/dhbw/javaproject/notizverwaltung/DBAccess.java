@@ -70,7 +70,7 @@ public class DBAccess {
 		}
 	}
 	
-	public void addNotiz(Notiz notiz) throws Exception {
+	public void addNotiz(String notiz) throws Exception {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("com.mysql.cj.jdbc.Driver");
