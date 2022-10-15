@@ -79,10 +79,9 @@ public class notizverwaltungController
 */
 	
 	@RequestMapping("/save")
-	public @ResponseBody boolean save(@RequestParam int id, @RequestParam String inhalt) {
-		
-		
-		return true;
+	public @ResponseBody String save(@RequestParam int id, @RequestParam String inhalt) throws Exception {
+		db.updateNotiz(id, inhalt);
+		return "Save successful! <br> <a href=\"/\">Return to home</a>";
 	}
 	
 	@RequestMapping("/")
@@ -96,23 +95,18 @@ public class notizverwaltungController
 				+ "	<tr>"
 				+ "		<th>ID</th>"
 				+ "		<th>Notiz</th>"
+				+ "		<th> </th>"
 				+ "	</tr> " ;
 		
 		for( Notiz n : notizListe) {
 			str = str + "<tr>"
 					+ "<form action=\"/save\" Method=\"GET\">"
-					+ "<td> <input name=\"id\" type=\"input\" value=\"" + n.getID() + "\" /> </td> <td> "
-					+ "<input name=\"inhalt\" type=\"input\" value=\"" + n.getInhalt() + "\" /> </td>"
-					+ "<input name=\"speichern\" type=\"submit\"/> </form> </tr>";
+					+ "<td> <input name=\"id\" type=\"text\" value=\"" + n.getID() + "\" /></td> "
+					+ "<td> <input name=\"inhalt\" type=\"input\" value=\"" + n.getInhalt() + "\" /> </td>"
+					+ "<td> <input name=\"speichern\" type=\"submit\"/></td> </form> </tr>";
 		}
 		
-		str = str + "</table> "
-				+ "<form action=\"/save\" Method=\"GET\">\n\"\n"
-				+ "Name: <input name=\"name\" type=\"input\"/><br>\n\" \n"
-				+ "Alter: <input name=\"alter\" type=\"input\"/><br>\n\"\n"
-				+ "<input name=\"speichern\" type=\"submit\"/><br>\n\" \n"
-				+ "</form>\\n\""
-				+ "</html>";
+		str = str + "</table></html>";
 		
 		return (str);
 
