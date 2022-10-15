@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.dhbw.javaproject.notizverwaltung.model.Notiz;
+import de.dhbw.javaproject.notizverwaltung.DBAccess;
 
 @RestController
 public class notizverwaltungController 
 {
-	static List<Notiz> notizListe;
+	private List<Notiz> notizListe;
+	
+	DBAccess db = new DBAccess();
 
 	/*
 	@RequestMapping("/add")
@@ -83,7 +86,9 @@ public class notizverwaltungController
 	}
 	
 	@RequestMapping("/")
-	public String home() {
+	public String home() throws Exception {
+		
+		this.notizListe = db.getNotizen();
 		
 		String str = "<html>Hallo Rolf, hier ist die Welt<br>\n" 
 				+ "Notizen:<br>\n" 
