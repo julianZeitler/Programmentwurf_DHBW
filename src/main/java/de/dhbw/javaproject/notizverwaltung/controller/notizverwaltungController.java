@@ -1,15 +1,8 @@
 package de.dhbw.javaproject.notizverwaltung.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.dialect.DB2390Dialect;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,13 +20,13 @@ public class notizverwaltungController
 	@RequestMapping("/new")
 	public @ResponseBody String save(@RequestParam String inhalt) throws Exception {
 		db.addNotiz(inhalt);
-		return "Added successfuly! <br> <a href=\"/\">Return to home</a>";
+		return "<html><head><meta http-equiv=\"refresh\" content=\"0; URL=http://localhost:8080/\"></head></html>";
 	}
 	
 	@RequestMapping("/save")
 	public @ResponseBody String save(@RequestParam int id, @RequestParam String inhalt) throws Exception {
 		db.updateNotiz(id, inhalt);
-		return "Save successful! <br> <a href=\"/\">Return to home</a>";
+		return "<html><head><meta http-equiv=\"refresh\" content=\"0; URL=http://localhost:8080/\"></head></html>";
 	}
 	
 	@RequestMapping("/")
@@ -557,14 +550,14 @@ public class notizverwaltungController
 				+ "<div id=\"site\">\n"
 				+ "    <!-- - - - - - - - - - - - - - - - - - - Logo - - - - - - - - - - - - - - - - - - - -->\n"
 				+ "    <div id=\"nav\" class=\"navbar-fixed-top\">\n"
-				+ "\n"
+				+ "<h1 style=\"margin-left:20px;\">Notizbuch</h1>\n"
 				+ "    </div>\n"
 				+ "    <div id=\"banner\" style=\"background-image: url(https://w5.giffitsstatic.com/pics/c504/328346_5.jpg);\">\n"
-				+ "        <h1>Notizbuch</h1>\n"
+				+ "\n"
 				+ "    </div>\n"
 				+ "\n"
 				+ "    <div id=\"contentWrapper2\">\n";
-String html2 =  "        "
+		String html2 =  "        "
 				+ "\n"
 				+ "    </div>\n"
 				+ "    <div id=\"footer\">\n"
@@ -576,7 +569,7 @@ String html2 =  "        "
 				+ "\n"
 				+ "            </div>\n"
 				+ "            <div id=\"f2c\">\n"
-				+ "\n"
+				+ "<p>Notizbuch von Julian und David</p>\n"
 				+ "            </div>\n"
 				+ "            <div id=\"f2r\">\n"
 				+ "\n"
