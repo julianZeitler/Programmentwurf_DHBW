@@ -3,6 +3,7 @@ package de.dhbw.javaproject.notizverwaltung.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.dialect.DB2390Dialect;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,6 +74,14 @@ public class notizverwaltungController
 			return (personList.size());
 	}
 */
+	
+	@RequestMapping("/save")
+	public @ResponseBody boolean save(@RequestParam int id, @RequestParam String inhalt) {
+		
+		
+		return true;
+	}
+	
 	@RequestMapping("/")
 	public String home() {
 		
@@ -85,10 +94,20 @@ public class notizverwaltungController
 				+ "	</tr> " ;
 		
 		for( Notiz n : notizListe) {
-			str = str + "<tr><td> " + n.getID() + " </td> <td> " + n.getInhalt() + " </td></tr>";
+			str = str + "<tr>"
+					+ "<form action=\"/save\" Method=\"GET\">"
+					+ "<td> <input name=\"id\" type=\"input\" value=\"" + n.getID() + "\" /> </td> <td> "
+					+ "<input name=\"inhalt\" type=\"input\" value=\"" + n.getInhalt() + "\" /> </td>"
+					+ "<input name=\"speichern\" type=\"submit\"/> </form> </tr>";
 		}
 		
-		str = str + "</table> </html>";
+		str = str + "</table> "
+				+ "<form action=\"/save\" Method=\"GET\">\n\"\n"
+				+ "Name: <input name=\"name\" type=\"input\"/><br>\n\" \n"
+				+ "Alter: <input name=\"alter\" type=\"input\"/><br>\n\"\n"
+				+ "<input name=\"speichern\" type=\"submit\"/><br>\n\" \n"
+				+ "</form>\\n\""
+				+ "</html>";
 		
 		return (str);
 
